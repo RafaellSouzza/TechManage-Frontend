@@ -1,0 +1,8 @@
+#menu {
+    display: none;
+  }
+  #menuButton:hover + #menu,
+  #menu:hover {
+    display: block;
+  }
+  

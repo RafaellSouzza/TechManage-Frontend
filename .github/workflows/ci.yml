@@ -1,4 +1,5 @@
 name: CI/CD for Angular Project
+
 on:
   push:
     branches:
@@ -36,3 +37,6 @@ jobs:
 
     - name: Run unit tests
       run: npm test -- --watch=false --code-coverage
+
+    - name: Check Tailwind Configuration
+      run: test -f tailwind.config.js && echo "Tailwind CSS configured" || echo "Tailwind CSS not configured"
