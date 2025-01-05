@@ -2,3 +2,11 @@ img {
     max-height: 50px;
   }
   
+#menu {
+  display: none;
+}
+#menuButton:hover + #menu,
+#menu:hover {
+  display: block;
+}
+  

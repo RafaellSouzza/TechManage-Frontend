@@ -8,14 +8,20 @@
     </div>
   
     <div class="relative">
-      <button id="menuButton" class="text-white hover:bg-gray-700 rounded-md p-2 focus:outline-none">
+      <button 
+        class="text-white hover:bg-gray-700 rounded-md p-2 focus:outline-none" 
+        (click)="toggleMenu()"
+      >
         ☰
       </button>
-      <div id="menu" class="hidden absolute right-0 mt-2 w-48 bg-white text-gray-800 rounded-md shadow-lg">
-        <a href="#" class="block px-4 py-2 hover:bg-gray-200">Home</a>
+      <div 
+        *ngIf="menuOpen" 
+        class="absolute right-0 mt-2 w-48 bg-white text-gray-800 rounded-md shadow-lg"
+      >
+        <a href="#" class="block px-4 py-2 hover:bg-gray-200 rounded-t-lg">Inicio</a>
         <a href="#" class="block px-4 py-2 hover:bg-gray-200">Usuários</a>
         <a href="#" class="block px-4 py-2 hover:bg-gray-200">Configurações</a>
-        <a href="#" class="block px-4 py-2 hover:bg-gray-200">Sair</a>
+        <a href="#" class="block px-4 py-2 hover:bg-gray-200 rounded-b-lg">Sair</a>
       </div>
     </div>
   </div>
