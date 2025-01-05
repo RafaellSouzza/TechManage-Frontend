@@ -7,7 +7,7 @@ import { MainLayoutComponent } from './components/layouts/main-layout/main-layou
 import { UserFormComponent } from './components/user-form/user-form.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
-import { HomeComponent } from './components/home/home.component';
+import { HomeComponent } from './pages/home/home.component';
 import { ModalComponent } from './components/modal/modal.component';
 
 @NgModule({
