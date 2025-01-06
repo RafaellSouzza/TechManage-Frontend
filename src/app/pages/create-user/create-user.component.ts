@@ -42,6 +42,7 @@ export class CreateUserComponent implements OnInit {
 
   salvarUsuario(): void {
     if (this.userForm.valid) {
+      console.log('Dados do usuário:', this.userForm.value);
       const formData = { ...this.userForm.value, foto: this.base64Image };
       this.userService.addUser(formData).subscribe(() => {
         this.router.navigate(['/']);

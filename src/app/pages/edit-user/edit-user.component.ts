@@ -58,6 +58,7 @@ export class EditUserComponent implements OnInit {
 
   salvarUsuario(): void {
     if (this.editUserForm.valid) {
+      console.log('Dados do usuário:', this.editUserForm.value);
       const updatedUser = { ...this.editUserForm.value, foto: this.currentPhoto };
       this.userService.editUser(this.userId, updatedUser).subscribe(() => {
         this.router.navigate(['/']);
