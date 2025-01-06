@@ -1,40 +1,33 @@
-<app-modal
-  [isOpen]="isModalOpen"
-  [title]="modalTitle"
-  [message]="modalMessage"
-  (confirm)="confirmarAcao()"
-  (cancel)="fecharModal()"
-></app-modal>
-
-<div class="flex justify-center bg-gray-100 min-h-40 p-4">
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+<div class="flex justify-center bg-gray-100 p-6">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
     <div 
       *ngFor="let usuario of usuarios" 
-      class="bg-white shadow-md rounded-lg p-4 flex flex-col items-center w-64"
+      class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center w-72 hover:shadow-2xl transition-shadow duration-300"
     >
-    <div class="bg-gray-200 w-24 h-24 rounded-full flex items-center justify-center mb-4">
+      <div class="bg-gray-300 w-24 h-24 rounded-full overflow-hidden mb-4 shadow-md">
         <img 
           [src]="usuario.foto || 'assets/imagens/avatar/Avatar-Image.jpg'" 
           alt="Foto do Usuário"
-          class="rounded-full w-full h-full object-cover"
+          class="w-full h-full object-cover"
         />
       </div>
-      
 
-      <h2 class="text-lg font-semibold text-gray-800 mb-2">{{ usuario.nome }}</h2>
+      <h2 class="text-xl font-semibold text-gray-800 mb-2 text-center">{{ usuario.nome }}</h2>
       <p class="text-gray-600 text-sm"><strong>E-mail:</strong> {{ usuario.email }}</p>
-      <p class="text-gray-600 text-sm mb-4"><strong>Telefone:</strong> {{ usuario.telefone }}</p>
+      <p class="text-gray-600 text-sm"><strong>Telefone:</strong> {{ usuario.telefone }}</p>
+      <p class="text-gray-600 text-sm"><strong>Data de Nascimento:</strong> {{ usuario.dataNascimento | date:'dd/MM/yyyy' }}</p>
+      <p class="text-gray-600 text-sm mb-4"><strong>Tipo de Usuário:</strong> {{ usuario.tipoUsuario }}</p>
 
-      <div class="flex space-x-4">
+      <div class="flex space-x-3 mt-4">
         <button 
-          class="bg-blue-500 text-white py-1 px-3 rounded hover:bg-blue-600"
-          (click)="abrirModal(usuario, 'editar')"
+          class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300"
+          (click)="abrirModal(usuario, Acao.Editar)"
         >
           Editar
         </button>
         <button 
-          class="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600"
-          (click)="abrirModal(usuario, 'excluir')"
+          class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 focus:outline-none focus:ring focus:ring-red-300"
+          (click)="abrirModal(usuario, Acao.Excluir)"
         >
           Excluir
         </button>

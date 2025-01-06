@@ -1,0 +1,45 @@
+<div class="relative">
+    <button 
+    class="text-white hover:bg-gray-700 rounded-md p-2 focus:outline-none flex items-center space-x-2" 
+    (click)="toggleMenu()"
+  >
+    <span>Menu</span>
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+    </svg>
+  </button>
+  <div 
+    *ngIf="menuOpen" 
+    class="absolute right-0 mt-2 w-56 bg-white text-gray-800 rounded-md shadow-lg border border-gray-200"
+  >
+    <div 
+      *ngIf="menuOpen" 
+      class="absolute right-0 mt-2 w-48 bg-white text-gray-800 rounded-md shadow-lg"
+    >
+      <a 
+        routerLink="/" 
+        class="block px-4 py-2 hover:bg-gray-200 rounded-t-lg"
+      >
+        Página Inicial
+      </a>
+      <a 
+        routerLink="/create-user" 
+        class="block px-4 py-2 hover:bg-gray-200"
+      >
+        Criar Usuário
+      </a>
+      <a 
+        href="#" 
+        class="block px-4 py-2 hover:bg-gray-200"
+      >
+        Configurações
+      </a>
+      <a 
+        href="#" 
+        class="block px-4 py-2 hover:bg-gray-200 rounded-b-lg"
+      >
+        Sair
+      </a>
+    </div>
+  </div>
+  

@@ -3,26 +3,10 @@
       <img src="assets/imagens/logo/ibm-svgrepo-com.svg" alt="Logo IBM" class="h-20">
     </div>
   
-    <div class="flex-1 text-center">
-      <h1 class="text-xl font-bold">TechManage</h1>
+    <div class="text-lg font-bold">
+      <a routerLink="/">TechManage</a>
     </div>
   
-    <div class="relative">
-      <button 
-        class="text-white hover:bg-gray-700 rounded-md p-2 focus:outline-none" 
-        (click)="toggleMenu()"
-      >
-        ☰
-      </button>
-      <div 
-        *ngIf="menuOpen" 
-        class="absolute right-0 mt-2 w-48 bg-white text-gray-800 rounded-md shadow-lg"
-      >
-        <a href="#" class="block px-4 py-2 hover:bg-gray-200 rounded-t-lg">Inicio</a>
-        <a href="#" class="block px-4 py-2 hover:bg-gray-200">Usuários</a>
-        <a href="#" class="block px-4 py-2 hover:bg-gray-200">Configurações</a>
-        <a href="#" class="block px-4 py-2 hover:bg-gray-200 rounded-b-lg">Sair</a>
-      </div>
-    </div>
+    <app-menu></app-menu>
   </div>
   

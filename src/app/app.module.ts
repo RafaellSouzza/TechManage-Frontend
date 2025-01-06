@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import { AxiosService } from './services/axios.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,6 +12,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ModalComponent } from './components/modal/modal.component';
+import { CreateUserComponent } from './pages/create-user/create-user.component';
+import { MenuComponent } from './components/menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -18,13 +23,19 @@ import { ModalComponent } from './components/modal/modal.component';
     FooterComponent,
     HeaderComponent,
     HomeComponent,
-    ModalComponent
+    ModalComponent,
+    CreateUserComponent,
+    MenuComponent,
+    
+    
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [AxiosService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
