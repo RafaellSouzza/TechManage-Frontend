@@ -14,11 +14,9 @@ export class ModalComponent {
 
   onConfirm(): void {
     this.confirm.emit();
-    this.isOpen = false;
   }
 
   onCancel(): void {
     this.cancel.emit();
-    this.isOpen = false;
   }
 }

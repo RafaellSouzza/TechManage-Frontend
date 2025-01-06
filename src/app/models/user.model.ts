@@ -14,7 +14,7 @@ export interface UsuarioRequest {
 }
 
 export interface UsuarioResponse {
-  id: number;
+  id: string;
   nome: string;
   email: string;
   telefone: string;

@@ -14,6 +14,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { CreateUserComponent } from './pages/create-user/create-user.component';
 import { MenuComponent } from './components/menu/menu.component';
+import { EditUserComponent } from './pages/edit-user/edit-user.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { MenuComponent } from './components/menu/menu.component';
     ModalComponent,
     CreateUserComponent,
     MenuComponent,
+    EditUserComponent,
     
     
   ],

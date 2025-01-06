@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { UsuarioResponse } from '../../models/user.model';
 import { Acao } from '../../models/action.model';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-home',
@@ -17,25 +19,35 @@ export class HomeComponent implements OnInit {
   modalAction: Acao | null = null;
   Acao = Acao;
 
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.carregarUsuarios();
   }
 
   carregarUsuarios(): void {
-    this.userService.getAllUsers().subscribe((data: UsuarioResponse[]) => {
+    this.userService.getUsers().subscribe((data: UsuarioResponse[]) => {
       this.usuarios = data;
     });
   }
 
   abrirModal(usuario: UsuarioResponse | null, acao: Acao): void {
+    this.usuarioSelecionado = usuario;
+    this.modalAction = acao;
+    this.isModalOpen = true;
+  
     if (acao === Acao.Editar) {
-      console.log(`Editando o usuário: ${usuario?.nome}`);
+      this.modalTitle = `Editar Usuário: ${usuario?.nome}`;
+      this.modalMessage = `Atualize as informações do usuário ${usuario?.nome}.`;
     } else if (acao === Acao.Excluir) {
-      console.log(`Excluindo o usuário: ${usuario?.nome}`);
+      this.modalTitle = `Excluir Usuário: ${usuario?.nome}`;
+      this.modalMessage = `Tem certeza que deseja excluir o usuário ${usuario?.nome}?`;
     } else if (acao === Acao.Adicionar) {
-      console.log('Adicionando um novo usuário');
+      this.modalTitle = 'Adicionar Novo Usuário';
+      this.modalMessage = 'Insira os dados do novo usuário.';
     }
   }
 
@@ -44,21 +56,17 @@ export class HomeComponent implements OnInit {
     this.usuarioSelecionado = null;
     this.modalAction = null;
   }
-
-  confirmarAcao(request: UsuarioResponse | null = null): void {
-    if (this.modalAction === 'excluir' && this.usuarioSelecionado) {
+  confirmarAcao(): void {
+    if (this.modalAction === Acao.Excluir && this.usuarioSelecionado) {
       this.userService.deleteUser(this.usuarioSelecionado.id).subscribe(() => {
         this.carregarUsuarios();
       });
-    } else if (this.modalAction === 'editar' && this.usuarioSelecionado && request) {
-      this.userService.editUser(this.usuarioSelecionado.id, request).subscribe(() => {
-        this.carregarUsuarios();
-      });
-    } else if (this.modalAction === 'adicionar' && request) {
-      this.userService.addUser(request).subscribe(() => {
-        this.carregarUsuarios();
-      });
+    } else if (this.modalAction === Acao.Editar && this.usuarioSelecionado) {
+      this.router.navigate([`/edit-user/${this.usuarioSelecionado.id}`]);
+    } else if (this.modalAction === Acao.Adicionar) {
+      this.router.navigate(['/create-user']);
     }
     this.fecharModal();
   }
+  
 }
