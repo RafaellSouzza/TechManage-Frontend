@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-create-user',
   templateUrl: './create-user.component.html',
-  styleUrls: ['./create-user.component.css']
+  styleUrls: ['./create-user.component.css'],
 })
 export class CreateUserComponent implements OnInit {
   userForm!: FormGroup;
@@ -19,14 +19,30 @@ export class CreateUserComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.inicializarFormulario();
+  }
+
+  private inicializarFormulario(): void {
     this.userForm = this.fb.group({
-      nome: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      telefone: ['', Validators.required],
-      dataNascimento: ['', Validators.required],
+      nome: ['', [Validators.required, Validators.minLength(3)]],
+      email: ['', [Validators.required, Validators.email, this.validarArroba]],
+      telefone: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(/^\d{2}(\d{9})$/)
+        ],
+      ],
+      dataNascimento: ['', [Validators.required, this.validarDataDeNascimento]],
       tipoUsuario: ['', Validators.required],
       foto: [null],
     });
+  }
+
+
+  onTelefoneInput(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    console.log('Valor atual do telefone:', input.value);
   }
 
   onFileSelected(event: Event): void {
@@ -54,5 +70,31 @@ export class CreateUserComponent implements OnInit {
 
   cancelar(): void {
     this.router.navigate(['/']);
+  }
+
+  private validarArroba(control: AbstractControl): { [key: string]: boolean } | null {
+    const valor = control.value;
+    if (valor && !valor.includes('@')) {
+      return { semArroba: true };
+    }
+    return null;
+  }
+
+  private validarDataDeNascimento(control: AbstractControl): { [key: string]: boolean } | null {
+    const data = new Date(control.value);
+    const hoje = new Date();
+    const idadeMinima = 18;
+    const idadeMaxima = 100;
+
+    const idade = hoje.getFullYear() - data.getFullYear();
+    if (
+      idade < idadeMinima ||
+      idade > idadeMaxima ||
+      (idade === idadeMinima && hoje < new Date(data.setFullYear(hoje.getFullYear())))
+    ) {
+      return { dataInvalida: true };
+    }
+
+    return null;
   }
 }
